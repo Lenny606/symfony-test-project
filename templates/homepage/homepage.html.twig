@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pageTitle }}</title>
+    <!-- Include your CSS stylesheets here -->
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+<body>
+<header>
+    <h1>Welcome to Our Website</h1>
+    <nav>
+        <ul>
+                        <li><a href="{{ path('app.index') }}">Home</a></li>
+                        <li><a href="{{ path('app.show', {id: id}) }}">Show Us</a></li>
+            {#            <li><a href="{{ path('about_page') }}">About Us</a></li> #}
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h2>Featured Products</h2>
+
+{#        passing variables pfrom paraent to child #}
+        {{ include('homepage/partials/productList.html.twig', {featuredProducts: featuredProducts}) }}
+
+    </section>
+
+    <section>
+        <h2>Latest News</h2>
+        <div class="news-list">
+            {#            {% for article in latestNews %} #}
+            {#                <article> #}
+            {#                    <h3>{{ article.title }}</h3> #}
+            {#                    <p>{{ article.summary }}</p> #}
+            {#                    <a href="{{ path('article_details', { 'id': article.id }) }}">Read more</a> #}
+            {#                </article> #}
+            {#            {% endfor %} #}
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; {{ currentYear }} Our Website. All rights reserved.</p>
+</footer>
+
+<!-- Include your JavaScript scripts here -->
+{% block javascripts %}
+    {% block importmap %}{{ importmap('app') }}{% endblock %}
+{% endblock %}
+</body>
+</html>
