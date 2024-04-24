@@ -54,9 +54,6 @@
 #ide
 /.idea
 
-#env
-.env
-.env.test
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
