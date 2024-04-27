@@ -47,3 +47,9 @@ set env:
 DATABASE_URL="mysql://root:root@127.0.0.1:3306//symf6?serverVersion=mariadb-10.8.3&charset=utf8mb4" \
 setup doctrine.yml :
 server_version: '10.8.3'
+
+### CSS
+```
+add tailwind
+<script src="https://cdn.tailwindcss.com"></script>
+```
