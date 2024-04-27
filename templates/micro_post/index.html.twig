@@ -7,7 +7,7 @@
         {% for post in posts %}
             {% if post is not empty %}
                 <div class="post">
-                    <a href="{{ path('app_micro_post_show', {post: post.id}) }}"><h3>{{ post.title }}</h3></a>
+                    <a href="{{ path('app_micro_post_show', {id: post.id}) }}"><h3>{{ post.title }}</h3></a>
                     <!-- Add more product details as needed -->
                 </div>
             {% endif %}
