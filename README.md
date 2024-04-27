@@ -9,7 +9,6 @@ composer require twig
 composer require --dev symfony/profiler-pack
 composer require --dev orm-fixtures
 composer require symfony/orm-pack
-composer require symfony/orm-pack
 
 ```
 ### Helpers + CMDs
@@ -33,10 +32,15 @@ symfony console doctrine:fixtures:load
 ```
 symfony console debug:router
 ```
+### DTB
+```
+host: mysql
+user: root
+```
 
 
 ### Setup Docker
-create doceker-compose.yml \
+create docker-compose.yml \
 set env:
 DATABASE_URL="mysql://root:root@127.0.0.1:3306//symf6?serverVersion=mariadb-10.8.3&charset=utf8mb4" \
 setup doctrine.yml :
