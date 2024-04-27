@@ -13,7 +13,7 @@ class MicroPostFormType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-//            ->add('text', TextType::class)
+            ->add('text', TextType::class)
             ->add('save', SubmitType::class)
         ;
     }
