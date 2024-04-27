@@ -55,6 +55,8 @@ class MicroPostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $data->setCreatedAt(new \DateTimeImmutable());
+            $data->setUpdatedAt(new \DateTimeImmutable());
+            $data->setAuthor($this->getUser());
             $em->persist($data);
             $em->flush();
 

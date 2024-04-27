@@ -17,11 +17,22 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        //test user
+        $user1 = new User();
+        $user1->setEmail('test@test.com');
+        $user1->setRoles([]);
+        $user1->setPassword(
+            $this->hasher->hashPassword(
+                $user1,
+                'test'
+            )
+        );
         //test data
         for ($i = 1; $i <= 10; $i++) {
             $micropost = new MicroPost();
             $micropost->setTitle("MicroPost $i");
             $micropost->setText($this->generateRandomString($i*10));
+            $micropost->setAuthor($user1);
             $micropost->setCreatedAt(new \DateTimeImmutable());
             $micropost->setUpdatedAt(new \DateTimeImmutable());
             $manager->persist($micropost);

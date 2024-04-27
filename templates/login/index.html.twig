@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form action="{{ path('app_login') }}" method="POST" class="max-w-md mx-auto p-4 bg-white shadow-lg rounded">
+        <label for="_username" class="block mb-2">Username</label>
+        <input type="text" id="_username" name="_username" value="{{ lastUsername }}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" /><br/>
+
+        <label for="_password" class="block mb-2 mt-4">Password</label>
+        <input type="password" id="_password" name="_password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" />
+
+        {# for redirection #}
+        <input type="hidden" name="_target_path" value="{{ path('app_micro_post') }}"/>
+
+        <button type="submit" class="w-full mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">Login</button>
+    </form>
+
+{% endblock %}

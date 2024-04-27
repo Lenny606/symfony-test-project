@@ -29,6 +29,7 @@ class CommentController extends AbstractController
             $data->setCreatedAt(new \DateTimeImmutable());
             $data->setUpdatedAt(new \DateTimeImmutable());
             $data->setMicroPost($post);
+            $data->setAuthor($this->getUser());
 
             $em->persist($data);
             $em->flush();
