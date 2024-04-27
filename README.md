@@ -20,6 +20,7 @@ symfony console list doctrine
 symfony console make:controller
 symfony console make:entity
 symfony console make:migration
+symfony console make:command
 symfony console doctrine:database:create
 symfony console doctrine:migration:migrate
 symfony console doctrine:migration:migrate --no-interaction
