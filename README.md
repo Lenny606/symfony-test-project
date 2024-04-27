@@ -12,7 +12,7 @@ composer require symfony/orm-pack
 composer require symfony/orm-pack
 
 ```
-### Helpers
+### Helpers + CMDs
 ```
 symfony console list make
 symfony console list doctrine
@@ -23,8 +23,10 @@ symfony console doctrine:database:create
 symfony console doctrine:migration:migrate
 symfony console doctrine:migration:migrate --no-interaction
 symfony console doctrine:migration:status
+```
+loads Fixtures into dtb
+```
 symfony console doctrine:fixtures:load
-
 ```
 
 ### Debugging
