@@ -33,9 +33,16 @@ class MicroPost
     #[ORM\Column(length: 1024)]
     private ?string $text = null;
 
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'liked')]
+    private Collection $likedBy;
+
     public function __construct()
     {
         $this->comment = new ArrayCollection();
+        $this->likedBy = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,6 +124,30 @@ class MicroPost
     public function setText(string $text): static
     {
         $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getLikedBy(): Collection
+    {
+        return $this->likedBy;
+    }
+
+    public function addLikedBy(User $likedBy): static
+    {
+        if (!$this->likedBy->contains($likedBy)) {
+            $this->likedBy->add($likedBy);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedBy(User $likedBy): static
+    {
+        $this->likedBy->removeElement($likedBy);
 
         return $this;
     }

@@ -12,5 +12,10 @@
             {{ post.createdAt|date('d/m/Y') }}
         {% endif %}
     </div>
+    <a href="{{ path('app_micro_comment_add'), {id: post.id} }}">
+        <div>
+            Add Comment
+        </div>
+    </a>
 
 {% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Create new Comment {% endblock %}
+{% block bread %}
+-> Post Comment
+{% endblock %}
+
+{% block body %}
+    {{ include('comment/partials/form.html.twig') }}
+
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\MicroPost;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
@@ -25,6 +26,8 @@ class AppFixtures extends Fixture
 
         $manager->flush();
     }
+
+
 
     private function generateRandomString($length = 50): string
     {

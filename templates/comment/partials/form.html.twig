@@ -1,0 +1,16 @@
+{#    in start can be action route configured #}
+    {{ form_start(form) }}
+
+    {{ form_errors(form) }}
+
+
+    {{ form_label(form.text, 'Add Comment ') }}
+
+{{ form_widget(form.text, {'attr': {"style": ""}}) }} <br>
+
+<button type="submit">Save Comment</button>
+
+{{ form_end(form) }}
+
+{# old form control #}
+{#    {{ form(form) }} #}
