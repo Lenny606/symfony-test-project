@@ -3,7 +3,6 @@
 {% block title %} Create new Post {% endblock %}
 
 {% block body %}
-    <h1>New POST</h1>
-    {{ form(form) }}
+ {{ include('form/partials/form.html.twig') }}
 
 {% endblock %}

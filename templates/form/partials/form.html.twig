@@ -1,0 +1,16 @@
+{#    in start can be action route configured #}
+    {{ form_start(form) }}
+
+    {{ form_errors(form) }}
+
+
+    {{ form_label(form.title, 'Add Post title ') }}
+
+{{ form_widget(form.title, {'attr': {"style": "color:red"}}) }} <br>
+
+<button type="submit">Save Post</button>
+
+{{ form_end(form) }}
+
+{# old form control #}
+{#    {{ form(form) }} #}
