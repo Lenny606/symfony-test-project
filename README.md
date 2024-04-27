@@ -9,6 +9,8 @@ composer require twig
 composer require --dev symfony/profiler-pack
 composer require --dev orm-fixtures
 composer require symfony/orm-pack
+composer require sensio/framework-extra-bundle
+
 
 ```
 ### Helpers + CMDs

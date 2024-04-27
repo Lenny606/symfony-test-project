@@ -16,15 +16,27 @@ class MicroPostController extends AbstractController
     {
 
 //        dd($posts->findAll());
-        $new = new MicroPost();
-        $new->setTitle("NEW");
-        $new->setCreatedAt(new \DateTimeImmutable());
-
-        $em->persist($new);
-        $em->flush();
+//        $new = new MicroPost();
+//        $new->setTitle("NEW");
+//        $new->setCreatedAt(new \DateTimeImmutable());
+//
+//        $em->persist($new);
+//        $em->flush();
 
         return $this->render('micro_post/index.html.twig', [
             'controller_name' => 'MicroPostController',
+            'post' => $posts->findAll(),
+        ]);
+    }
+
+    #[Route('/micro-post/{id<\d+>}', name: 'app_micro_post_show')]
+    public function showOne(MicroPost $id) :Response
+    {
+        //sensio test
+        dd($id);
+        return $this->render('micro_post/show.html.twig', [
+            'controller_name' => 'MicroPostController',
+            'post' => $id
         ]);
     }
 
