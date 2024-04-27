@@ -17,7 +17,7 @@ class MicroPost
     private ?string $title = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    private ?\DateTimeImmutable $created_at;
 
     public function getId(): ?int
     {

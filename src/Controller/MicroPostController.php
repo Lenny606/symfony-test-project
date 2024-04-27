@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\MicroPost;
+use App\Entity\MicroPostFormType;
 use App\Repository\MicroPostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -30,7 +34,7 @@ class MicroPostController extends AbstractController
     }
 
     #[Route('/micro-post/{id<\d+>}', name: 'app_micro_post_show')]
-    public function showOne(MicroPost $id) :Response
+    public function showOne(MicroPost $id): Response
     {
 
         return $this->render('micro_post/show.html.twig', [
@@ -39,6 +43,29 @@ class MicroPostController extends AbstractController
         ]);
     }
 
+    #[Route('/micro-post/add', name: 'app_micro_post_add', priority: 2)]
+    public function add(Request $request, EntityManagerInterface $em): Response
+    {
+        $newMP = new MicroPost();
+
+        $form = $this->createForm(MicroPostFormType::class, $newMP);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $data->setCreatedAt(new \DateTimeImmutable());
+            $em->persist($data);
+            $em->flush();
+
+            $this->addFlash("success", "SAVED");
+            return $this->redirectToRoute('app_micro_post');
+
+        }
+
+        return $this->render('form/addPost.html.twig', [
+            'form' => $form]);
+    }
 
 
 }
