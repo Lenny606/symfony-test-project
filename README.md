@@ -24,6 +24,9 @@ symfony console doctrine:database:create
 symfony console doctrine:migration:migrate
 symfony console doctrine:migration:migrate --no-interaction
 symfony console doctrine:migration:status
+
+ symfony console make:user
+
 ```
 loads Fixtures into dtb
 ```
