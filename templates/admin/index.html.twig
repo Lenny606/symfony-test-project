@@ -1,0 +1,12 @@
+{% extends 'admin/partials/administration_layout.html.twig' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+<div class="w-full md:w-2/3 mx-auto">
+    {% for message in app.flashes('success') %}
+        <div class="rounded-md pd-2 bg-green-300 border dark:border-green-600">{{ message }}</div>
+    {% endfor %}
+</div>
+{% block body %}
+    <h2 class="text-3xl font-semibold mb-4">Dashboard</h2>
+    <p>Welcome to the admin dashboard!</p>
+{% endblock %}

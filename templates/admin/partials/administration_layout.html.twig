@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Administration{% endblock %}</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+<header class="bg-gray-800 text-white py-4">
+    <!-- Include the header partial -->
+    {% include 'admin/partials/admin_header.html.twig' %}
+</header>
+
+<nav class="bg-gray-700 text-white py-4">
+    <!-- Include the navigation menu partial -->
+    {% include 'admin/partials/admin_navigation.html.twig' %}
+</nav>
+
+<main class="container mx-auto my-8">
+    <!-- Content specific to each page will go here -->
+    {% block body %}{% endblock %}
+</main>
+
+<footer class="bg-gray-800 text-white py-4">
+    <!-- Include the footer partial -->
+    {% include 'admin/partials/admin_footer.html.twig' %}
+</footer>
+
+</body>
+</html>

@@ -6,7 +6,7 @@
     <header class="flex justify-around items-center py-4 px-6 bg-gray-900 text-white">
         <a class="text-xl font-semibold" href="{{ path('app.index') }}">Homepage</a>
         <a class="text-xl font-semibold" href="{{ path('app_micro_post_add') }}">Add Post</a>
-        <a class="text-xl font-semibold" href="">Admin</a>
+        <a class="text-xl font-semibold" href="{{ path('app_admin') }}">Admin</a>
         <a class="text-xl font-semibold" href="">About</a>
         <nav class="flex">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}

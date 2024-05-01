@@ -1,0 +1,39 @@
+{% extends 'admin/partials/administration_layout.html.twig' %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="rounded-md pd-2 bg-green-300 border dark:border-green-600">{{ message }}</div>
+    {% endfor %}
+    <h2 class="text-3xl font-semibold mb-4">Users</h2>
+
+    <div class="overflow-x-auto">
+        <table class="table-auto w-full border-collapse border border-gray-200">
+            <thead>
+            <tr class="bg-gray-200">
+                <th class="px-4 py-2">ID</th>
+                <th class="px-4 py-2">Email</th>
+                <th class="px-4 py-2">Roles</th>
+                <th class="px-4 py-2">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in userList %}
+                <tr>
+                    <td class="border px-4 py-2">{{ user.id }}</td>
+                    <td class="border px-4 py-2">{{ user.email }}</td>
+                    <td class="border px-4 py-2">
+                        {% for role in user.roles %}
+                            <span class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ role }}</span>
+                        {% endfor %}
+                    </td>
+                    <td class="border px-4 py-2">
+                        <form action="{{ path('admin_user_delete', {'id': user.id}) }}" method="post">
+                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

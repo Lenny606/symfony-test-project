@@ -4,6 +4,9 @@ controllers:
         namespace: App\Controller
     type: attribute
 
+health_check:
+    path: /health
+    controller: Api\Actions
 #app_index:
 #    path: /
 #    controller: App\Controller\HomePageController::index

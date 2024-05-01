@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\Logger;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +19,8 @@ class LoginController extends AbstractController
     #[Route('/login', name: 'app_login')]
     public function index(
         AuthenticationUtils $utils,
-        MailerInterface     $mailer): Response
+        MailerInterface     $mailer,
+        Logger $logger): Response
     {
         $error = $utils->getLastAuthenticationError();
         $lastUsername = $utils->getLastUsername();
@@ -36,8 +38,11 @@ class LoginController extends AbstractController
 
         try {
             $mailer->send($email);
+
         } catch (TransportExceptionInterface $e) {
+            $logger->log('Emailer', "Email not sent");
             throw new TransportException($e->getMessage());
+
         }
 
         return $this->render('login/index.html.twig', [
