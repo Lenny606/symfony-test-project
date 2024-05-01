@@ -48,9 +48,11 @@ user: root
 ### Setup Docker
 create docker-compose.yml \
 set env:
-DATABASE_URL="mysql://root:root@127.0.0.1:3306//symf6?serverVersion=mariadb-10.8.3&charset=utf8mb4" \
+DATABASE_URL="mysql://root:root@mysql:3306//symf6-hands-on?serverVersion=mariadb-10.8.3&charset=utf8mb4" \
 setup doctrine.yml :
-server_version: '10.8.3'
+server_version: '8.0'
+
+docker compose exec php-fpm sh
 
 ### CSS
 ```
