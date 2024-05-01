@@ -1,16 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ALl Posts{% endblock %}
+{% block title %}All Posts{% endblock %}
 
 {% block body %}
-    <div class="post-list">
-        {% for post in posts %}
-            {% if post is not empty %}
-                <div class="post">
-                    <a href="{{ path('app_micro_post_show', {id: post.id}) }}"><h3>{{ post.title }}</h3></a>
-                    <!-- Add more product details as needed -->
-                </div>
+    <header class="flex justify-around items-center py-4 px-6 bg-gray-900 text-white">
+        <a class="text-xl font-semibold" href="{{ path('app.index') }}">Homepage</a>
+        <a class="text-xl font-semibold" href="{{ path('app_micro_post_add') }}">Add Post</a>
+        <a class="text-xl font-semibold" href="">Admin</a>
+        <a class="text-xl font-semibold" href="">About</a>
+        <nav class="flex">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a class="ml-4" href="{{ path('app_logout') }}">Logout</a>
+            {% else %}
+                <a class="ml-4" href="{{ path('app_login') }}">Login</a>
             {% endif %}
-        {% endfor %}
+        </nav>
+    </header>
+    <div class="container mx-auto mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% for post in posts %}
+                {% if post is not empty %}
+                    <div class="p-4 bg-white rounded shadow">
+                        <a href="{{ path('app_micro_post_show', {id: post.id}) }}">
+                            <h3 class="text-lg font-semibold">{{ post.title }}</h3>
+                        </a>
+                        <!-- Add more product details as needed -->
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

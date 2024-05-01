@@ -3,19 +3,25 @@
 {% block title %}Posts {{ post.title }} {% endblock %}
 
 {% block body %}
-    <h3>{{ post.title }}</h3>
-    <div>{{ post.text }}</div>
-    <div>
-        {% if date(post.createdAt) < date('-1year') %}
-            Older than 1 Year
-        {% else %}
-            {{ post.createdAt|date('d/m/Y') }}
-        {% endif %}
-    </div>
-    <a href="{{ path('app_micro_comment_add'), {id: post.id} }}">
-        <div>
-            Add Comment
+    <div class="container mx-auto mt-8">
+        <h3 class="text-3xl font-semibold">{{ post.title }}</h3>
+        <div class="mt-4 text-gray-600">{{ post.author.email }}</div>
+        <div class="mt-4">{{ post.text }}</div>
+        {% for comment in post.comment %}
+            <div class="mt-4">{{ comment.text }}</div>
+        {% endfor %}
+        <div class="mt-4">
+            {% if date(post.createdAt) < date('-1year') %}
+                <span class="text-red-500">Older than 1 Year</span>
+            {% else %}
+                <span>{{ post.createdAt|date('d/m/Y') }}</span>
+            {% endif %}
         </div>
-    </a>
-
+        <a href="{{ path('app_micro_comment_add', {id: post.id}) }}" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            Add Comment
+        </a>
+        <a href="{{ path('app_micro_post') }}" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            Back
+        </a>
+    </div>
 {% endblock %}

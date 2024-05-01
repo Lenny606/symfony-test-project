@@ -1,11 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Create new Comment {% endblock %}
+{% block title %}Create new Comment{% endblock %}
 {% block bread %}
--> Post Comment
+    <nav class="text-sm" aria-label="Breadcrumb">
+        <ol class="list-none p-0 inline-flex">
+            <li class="flex items-center">
+                <a href="{{ path('app_micro_post_show', {id: post.id}) }}" class="text-blue-500">{{ post.title }}</a>
+                <span class="mx-2">-></span>
+            </li>
+            <li class="flex items-center">
+                Post Comment
+            </li>
+        </ol>
+    </nav>
 {% endblock %}
 
 {% block body %}
-    {{ include('comment/partials/form.html.twig') }}
-
+    <div class="container mx-auto mt-8">
+        {{ include('comment/partials/form.html.twig') }}
+    </div>
 {% endblock %}

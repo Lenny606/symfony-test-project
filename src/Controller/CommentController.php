@@ -35,7 +35,7 @@ class CommentController extends AbstractController
             $em->flush();
 
             $this->addFlash("success", "Comment SAVED");
-            return $this->redirectToRoute('app_micro_comment_show', [
+            return $this->redirectToRoute('app_micro_post_show', [
                 'id' => $post->getId()
             ]);
 

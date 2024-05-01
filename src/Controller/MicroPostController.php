@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\MicroPost;
 use App\Entity\MicroPostFormType;
+use App\Enums\Roles;
 use App\Repository\MicroPostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,10 +13,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class MicroPostController extends AbstractController
 {
+
     #[Route('/micro-post', name: 'app_micro_post')]
+//    #[IsGranted(MicroPost::VIEW)]
     public function index(MicroPostRepository $posts, EntityManagerInterface $em): Response
     {
 
@@ -34,6 +38,7 @@ class MicroPostController extends AbstractController
     }
 
     #[Route('/micro-post/{id<\d+>}', name: 'app_micro_post_show')]
+    #[IsGranted(MicroPost::VIEW, 'id')]
     public function showOne(MicroPost $id): Response
     {
 
@@ -44,8 +49,12 @@ class MicroPostController extends AbstractController
     }
 
     #[Route('/micro-post/add', name: 'app_micro_post_add', priority: 2)]
+//    #[isGranted('IS_AUTHENTICATED_FULLY')]
     public function add(Request $request, EntityManagerInterface $em): Response
     {
+        //access rights - isGranted() or denyAccess() or in Attributes, or in security.yml
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $newMP = new MicroPost();
 
         $form = $this->createForm(MicroPostFormType::class, $newMP);
@@ -70,8 +79,10 @@ class MicroPostController extends AbstractController
     }
 
     #[Route('/micro-post/{id}/edit', name: 'app_micro_post_edit')]
+    #[IsGranted(MicroPost::EDIT, 'id')]
     public function edit(MicroPost $id, Request $request, EntityManagerInterface $em): Response
     {
+
 
         $form = $this->createForm(MicroPostFormType::class, $id);
 
