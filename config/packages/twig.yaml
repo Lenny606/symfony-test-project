@@ -1,7 +1,9 @@
 twig:
     file_name_pattern: '*.twig'
-    form_themes:
+#    form_themes:
 #        [ 'bootstrap_5_layout.html.twig']
+    globals:
+        images: '%relative_img_dir%'
 
 when@test:
     twig:
