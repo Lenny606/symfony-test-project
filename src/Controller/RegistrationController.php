@@ -32,6 +32,8 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
+            $user->getUserProfile()->setCreatedAt(new \DateTimeImmutable());
+            $user->getUserProfile()->setUpdatedAt(new \DateTimeImmutable());
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -78,6 +80,6 @@ class RegistrationController extends AbstractController
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('app.index');
     }
 }

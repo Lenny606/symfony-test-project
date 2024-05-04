@@ -4,20 +4,44 @@
 
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            {{ flash_error }}
+        </div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <h1 class="text-2xl font-bold mb-4">Register</h1>
 
     {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+    {{ form_start(registrationForm, {'attr' : {'class': "max-w-md mx-auto p-4 bg-white shadow-lg rounded"}}) }}
+    <div class="text-xl">Basic Info</div>
+    <div class="text-grey">Credentials</div>
 
-        <button type="submit" class="btn">Register</button>
+    <div class="flex-column items-center">
+    <div class="mb-4">
+        {{ form_row(registrationForm.email, {'attr': {'class': 'shadow appearance-none border rounded w-50 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'}}) }}
+    </div>
+    <div class="mb-4">
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password',
+            'attr': {'class': 'shadow appearance-none border rounded w-50 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'}
+        }) }}
+    </div>
+    <div class="mb-4">
+        {{ form_row(registrationForm.agreeTerms, {'label_attr': {'class': 'inline-flex items-center'}, 'attr': {'class': 'mr-2'}}) }}
+        <label for="{{ registrationForm.agreeTerms.vars.id }}" class="text-sm">
+            I agree to the terms and conditions
+        </label>
+    </div>
+
+        <div class="border-b border-grey"></div>
+        <div class="text-xl">Your Profile</div>
+        <div class="text-grey">Optional</div>
+
+        {{ include('user/user_profile/partials/form.html.twig', {form: registrationForm.userProfile}) }}
+
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Register</button>
+    <a href="{{ path('app.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">HOME</a>
+    </div>
     {{ form_end(registrationForm) }}
 {% endblock %}

@@ -48,6 +48,11 @@ services:
     restart: always
     ports:
       - '${ADMINER_PORT}:8080'
+  mailer:
+    image: schickling/mailcatcher
+    ports:
+    - 1080:1080
+    - 1025:1025
 volumes:
   db-data:
     external: true

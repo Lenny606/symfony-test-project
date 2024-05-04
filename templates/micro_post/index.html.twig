@@ -8,6 +8,7 @@
         <a class="text-xl font-semibold" href="{{ path('app_micro_post_add') }}">Add Post</a>
         <a class="text-xl font-semibold" href="{{ path('app_admin') }}">Admin</a>
         <a class="text-xl font-semibold" href="">About</a>
+        <a class="text-xl font-semibold" href="{{ path('app_user_profile') }}">To Profile</a>
         <nav class="flex">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a class="ml-4" href="{{ path('app_logout') }}">Logout</a>
