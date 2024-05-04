@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Services\Interface\LoggerInterface;
 use App\Services\Logger;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -16,14 +18,24 @@ use function Webmozart\Assert\Tests\StaticAnalysis\email;
 
 class LoginController extends AbstractController
 {
+    public function __construct(
+        private LoggerInterface $logger,
+        private  AuthenticationUtils $utils
+    )
+    {
+
+    }
+
     #[Route('/login', name: 'app_login')]
     public function index(
-        AuthenticationUtils $utils,
         MailerInterface     $mailer,
-        Logger $logger): Response
+        Request $request
+        ): Response
     {
-        $error = $utils->getLastAuthenticationError();
-        $lastUsername = $utils->getLastUsername();
+        $error = $this->utils->getLastAuthenticationError();
+        $lastUsername = $this->utils->getLastUsername();
+
+        $this->logger->access("User $lastUsername logged in " . (new \DateTime())->format('Y-m-d H:i:s'));
 
         $email = new TemplatedEmail();
         $email
@@ -40,7 +52,7 @@ class LoginController extends AbstractController
             $mailer->send($email);
 
         } catch (TransportExceptionInterface $e) {
-            $logger->log('Emailer', "Email not sent");
+            $this->logger->log('Emailer', "Email not sent");
             throw new TransportException($e->getMessage());
 
         }
@@ -54,6 +66,7 @@ class LoginController extends AbstractController
     #[Route('/logout', name: 'app_logout')]
     public function logout(): void
     {
-
+        $lastUsername = $this->utils->getLastUsername();
+        $this->logger->access("User $lastUsername log out in " . (new \DateTime())->format('Y-m-d H:i:s'));
     }
 }

@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HealthCheckAction
 {
-    #[Route("/health", name: "health")]
+    #[Route("/api/v1/health", name: "health")]
     public function __invoke(): JsonResponse
     {
         // You can perform any health checks here
