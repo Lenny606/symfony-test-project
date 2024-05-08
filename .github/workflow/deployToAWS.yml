@@ -1,0 +1,23 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - docker  # Change this to match your branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Copy files to AWS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "."  # Path to the files you want to copy
+          target: "/var/www/test-project"  # Destination directory on AWS instance
