@@ -1,11 +1,17 @@
 <div class="product-list">
     {% for product in featuredProducts %}
-        {% if product.name is not empty %}
-            <div class="product">
-                <h3>{{ product.name }}</h3>
-                <p>{{ product.description }}</p>
-                <p>Price: ${{ product.price }} Eur</p>
+        {% if product.id is not empty %}
+            <div class="product flex justify-around items-center bg-white shadow-md rounded-md p-4" id="{{ product.id }}">
+                <div class="description">
+                    <h3 class="text-xl font-semibold">{{ product.title }}</h3>
+                    <h4 class="text-lg text-gray-600">{{ product.brand }}</h4>
+                    <p class="text-gray-700">{{ product.description }}</p>
+                    <p class="text-gray-900 font-semibold">Price: ${{ product.price }} Eur</p>
+                </div>
                 <!-- Add more product details as needed -->
+                <div class="img mt-4 flex justify-end">
+                    <img src="{{ product.thumbnail }}" class="w-1/2 rounded-md" />
+                </div>
             </div>
         {% endif %}
     {% endfor %}

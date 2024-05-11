@@ -16,19 +16,7 @@
 <body>
 <header>
     <h1>Welcome to Our Website</h1>
-    <nav>
-        <ul>
-            <li><a href="{{ path('app.index') }}">Home</a></li>
-            <li><a href="{{ path('app.show', {id: id}) }}">Show Us</a></li>
-            {#            <li><a href="{{ path('about_page') }}">About Us</a></li> #}
-            <!-- Add more navigation links as needed -->
-            <li><a href="{{ path('app_micro_post_add') }}">New Post</a></li>
-            <li><a href="{{ path('app_micro_post') }}">All Post</a></li>
-            <li><a href="{{ path('app_instagram_auth') }}">Instagram</a></li>
-            <li><a href="{{ path('app_register') }}">Register</a></li>
-            <li><a href="{{ path('app_login') }}">Login</a></li>
-        </ul>
-    </nav>
+    {{ include('homepage/partials/navigation.html.twig') }}
 </header>
 
 <main>
@@ -62,5 +50,7 @@
 {% block javascripts %}
     {% block importmap %}{{ importmap('app') }}{% endblock %}
 {% endblock %}
+{#        tailwind setup #}
+<script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>

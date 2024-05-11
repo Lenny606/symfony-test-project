@@ -1,0 +1,5 @@
+saved:
+  profile:
+    success: Profile saved
+  user:
+    success: User saved

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\GetProductsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,8 +11,9 @@ class HomePageController extends AbstractController
 {
 
     #[Route("/{limit<\d+>?0}", name: "app.index")]
-    public function index(int $limit): Response
+    public function index(int $limit, GetProductsService $getProductsService ): Response
     {
+        $data = $getProductsService->loadData('https://dummyjson.com/products', [ 'limit' => '6']);
 
 
         $template = $this->render(
@@ -20,23 +22,7 @@ class HomePageController extends AbstractController
                 'limit' => $limit,
                 'id' => $limit,
                 'pageTitle' => 'Homepage',
-                'featuredProducts' => [
-                    [
-                        'name' => "Adui",
-                        'description' => "skkvnsen",
-                        'price' => "20"
-                    ],
-                   [
-                       'name' => "AFe",
-                       'description' => "acdc",
-                       'price' => "220"
-                   ],
-                    [
-                        'name' => "",
-                        'description' => "acdc",
-                        'price' => "220"
-                    ]
-                ],
+                'featuredProducts' => $data['products'],
                 'currentYear' => date('Y'),
             ]
         );

@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserProfileController extends AbstractController
 {
@@ -23,6 +24,7 @@ class UserProfileController extends AbstractController
     public function profile(
         Request                $request,
         UserRepository         $users,
+        TranslatorInterface $translator,
         EntityManagerInterface $em): Response
     {
         /** @var User $user */
@@ -46,7 +48,9 @@ class UserProfileController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash("success", "Profile saved");
+           $message = $translator->trans('saved.success.profile');
+
+            $this->addFlash("success", $message);
             return $this->redirectToRoute('app_user_profile');
 
         }

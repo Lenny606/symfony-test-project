@@ -12,7 +12,8 @@ class GetUsersAction
    {
    }
 
-    #[Route("/api/v1/users", name: "api_users")]
+
+    #[Route("/api/v1/users", name: "api_users", methods: "GET")]
     public function action(): JsonResponse
     {
         //$users = $this->userRepository->findAll();
