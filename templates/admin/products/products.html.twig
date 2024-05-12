@@ -1,0 +1,44 @@
+{% extends 'admin/partials/administration_layout.html.twig' %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="rounded-md pd-2 bg-green-300 border dark:border-green-600">{{ message }}</div>
+    {% endfor %}
+    <h2 class="text-3xl font-semibold mb-4">Products</h2>
+    <a href="{{ path('admin_product_add') }}"><button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+        Add
+    </button></a>
+    <div class="overflow-x-auto">
+        <table class="table-auto w-full border-collapse border border-gray-200">
+            <thead>
+            <tr class="bg-gray-200">
+                <th class="px-4 py-2">ID</th>
+                <th class="px-4 py-2">Title</th>
+                <th class="px-4 py-2">Price</th>
+                <th class="px-4 py-2">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in productList %}
+                <tr>
+                    <td class="border px-4 py-2">{{ product.id }}</td>
+                    <td class="border px-4 py-2">{{ product.title }}</td>
+                    <td class="border px-4 py-2">{{ product.price }}</td>
+                    <td class="border px-4 py-2">
+                        <form action="{{ path('admin_product_delete', {'id': product.id}) }}" method="post">
+                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                                Delete
+                            </button>
+                        </form>
+                        <form action="{{ path('admin_product_edit', {'id': product.id}) }}" method="post">
+                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                                Edit
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

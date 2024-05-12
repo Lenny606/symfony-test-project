@@ -6,23 +6,42 @@ use App\Entity\MicroPost;
 use App\Entity\MicroPostFormType;
 use App\Enums\Roles;
 use App\Repository\MicroPostRepository;
+use App\Services\Interface\LoggerInterface;
+use App\Services\LoginEmailService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportException;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class MicroPostController extends AbstractController
 {
+    public function __construct(private LoggerInterface $logger,)
+    {
+    }
 
     #[Route('/micro-post', name: 'app_micro_post')]
 //    #[IsGranted(MicroPost::VIEW)]
-    public function index(MicroPostRepository $posts, EntityManagerInterface $em): Response
+    public function index(Request $request, MicroPostRepository $posts, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
-
+        //email is sent after login
+        $urlFromHeader = $request->headers->get('referer');
+        $basename = pathinfo($urlFromHeader)['basename'];
+        if ($basename === 'login') {
+           try{
+               LoginEmailService::sendLoginEmail($mailer, $this->getUser());
+           }  catch (TransportExceptionInterface $e) {
+               $this->logger->log('Emailer', "Email not sent");
+               throw new TransportException($e->getMessage());
+           }
+        }
 //        dd($posts->findAll());
 //        $new = new MicroPost();
 //        $new->setTitle("NEW");

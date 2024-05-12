@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ProductRepository;
 use App\Services\GetProductsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,8 +12,9 @@ class HomePageController extends AbstractController
 {
 
     #[Route("/{limit<\d+>?0}", name: "app.index")]
-    public function index(int $limit, GetProductsService $getProductsService ): Response
+    public function index(int $limit, GetProductsService $getProductsService, ProductRepository $productRepository ): Response
     {
+
         $data = $getProductsService->loadData('https://dummyjson.com/products', [ 'limit' => '6']);
 
 
