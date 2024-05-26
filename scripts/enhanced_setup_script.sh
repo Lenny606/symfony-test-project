@@ -49,7 +49,7 @@ create_directories() {
 # Function to download and unzip the file
 download_and_unzip() {
     echo 'Switching to temp/file directory'
-    cd "$TEMP_DIR"
+    cd "$TEMP_DIR" || exit
     check_command "Changing directory to $TEMP_DIR"
     echo '################################'
     echo
