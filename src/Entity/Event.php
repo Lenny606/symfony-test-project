@@ -7,6 +7,7 @@ use App\Entity\Embeddable\Contact;
 use App\Repository\EventRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\UuidInterface;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event
@@ -14,8 +15,8 @@ class Event
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(name: 'id', type: 'uuid', nullable: false)]
+    private ?UuidInterface $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -27,7 +28,7 @@ class Event
     #[ORM\Embedded(class: Contact::class)]
     protected ?Contact $contact;
     #[ORM\Embedded(class: Address::class)]
-    private ?Address $address;
+    protected ?Address $address;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;

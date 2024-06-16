@@ -19,24 +19,44 @@
 </div>
 <!-- Optional Fields Toggle Checkbox -->
 <div class="mb-4">
-    <label class="block text-gray-700 font-bold mb-2" for="toggleOptionalFields">Show Optional Fields</label>
-    <input type="checkbox" id="toggleOptionalFields">
+    <label class="block text-gray-700 font-bold mb-2" for="toggleOptionalFields">Fill Contact (Optional)</label>
+    <input type="checkbox" id="toggleOptionalFieldsContact">
 </div>
-<div class="mb-4  optional-field" >
-    {{ form_label(form.contact.firstName, 'Add Name', {'class': 'block text-gray-700 font-bold mb-2'}) }}
+<div class="mb-4">
+    <label class="block text-gray-700 font-bold mb-2" for="toggleOptionalFields">Fill Address (Optional)</label>
+    <input type="checkbox" id="toggleOptionalFieldsAddress">
+</div>
+<div class="mb-4  optional-field-contact" >
+    {{ form_label(form.contact.firstName, 'Add First Name', {'class': 'block text-gray-700 font-bold mb-2'}) }}
     {{ form_widget(form.contact.firstName, {'attr': {'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500'}}) }}
 </div>
-<div class="mb-4  optional-field" >
-    {{ form_label(form.contact.surname, 'Add Name', {'class': 'block text-gray-700 font-bold mb-2'}) }}
+<div class="mb-4  optional-field-contact" >
+    {{ form_label(form.contact.surname, 'Add Last Name', {'class': 'block text-gray-700 font-bold mb-2'}) }}
     {{ form_widget(form.contact.surname, {'attr': {'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500'}}) }}
 </div>
-<div class="mb-4  optional-field" >
-    {{ form_label(form.contact.email, 'Add Name', {'class': 'block text-gray-700 font-bold mb-2'}) }}
+<div class="mb-4  optional-field-contact" >
+    {{ form_label(form.contact.email, 'Add Email', {'class': 'block text-gray-700 font-bold mb-2'}) }}
     {{ form_widget(form.contact.email, {'attr': {'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500'}}) }}
 </div>
-<div class="mb-4  optional-field" >
-    {{ form_label(form.contact.phone, 'Add Name', {'class': 'block text-gray-700 font-bold mb-2'}) }}
+<div class="mb-4  optional-field-contact" >
+    {{ form_label(form.contact.phone, 'Add Phone', {'class': 'block text-gray-700 font-bold mb-2'}) }}
     {{ form_widget(form.contact.phone, {'attr': {'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500'}}) }}
+</div>
+<div class="mb-4  optional-field-address" >
+    {{ form_label(form.address.street, 'Add Street', {'class': 'block text-gray-700 font-bold mb-2'}) }}
+    {{ form_widget(form.address.street, {'attr': {'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500'}}) }}
+</div>
+<div class="mb-4  optional-field-address" >
+    {{ form_label(form.address.city, 'Add City', {'class': 'block text-gray-700 font-bold mb-2'}) }}
+    {{ form_widget(form.address.city, {'attr': {'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500'}}) }}
+</div>
+<div class="mb-4  optional-field-address" >
+    {{ form_label(form.address.zipcode, 'Add Zip Code', {'class': 'block text-gray-700 font-bold mb-2'}) }}
+    {{ form_widget(form.address.zipcode, {'attr': {'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500'}}) }}
+</div>
+<div class="mb-4  optional-field-address" >
+    {{ form_label(form.address.state, 'Add State', {'class': 'block text-gray-700 font-bold mb-2'}) }}
+    {{ form_widget(form.address.state, {'attr': {'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500'}}) }}
 </div>
 
 <button type="submit" class="w-full mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">Save Event</button>
@@ -44,15 +64,15 @@
     // JavaScript code here
     document.addEventListener("DOMContentLoaded", function() {
         var checkbox = document.getElementById("toggleOptionalFields");
-        var optionalFields = document.querySelectorAll(".optional-field");
+        var toggleOptionalFieldsContact = document.querySelectorAll(".optional-field-contact");
 
         checkbox.addEventListener("change", function() {
             if (checkbox.checked) {
-                optionalFields.forEach(function(field) {
+                toggleOptionalFieldsContact.forEach(function(field) {
                     field.style.display = "block";
                 });
             } else {
-                optionalFields.forEach(function(field) {
+                toggleOptionalFieldsContact.forEach(function(field) {
                     field.style.display = "none";
                 });
             }
@@ -60,7 +80,28 @@
 
         // Initially hide optional fields if the checkbox is not checked
         if (!checkbox.checked) {
-            optionalFields.forEach(function(field) {
+            toggleOptionalFieldsContact.forEach(function(field) {
+                field.style.display = "none";
+            });
+        }
+        var checkboxAddress = document.getElementById("toggleOptionalFieldsAddress");
+        var toggleOptionalFieldsAddress = document.querySelectorAll(".optional-field-address");
+
+        checkboxAddress.addEventListener("change", function() {
+            if (checkboxAddress.checked) {
+                toggleOptionalFieldsAddress.forEach(function(field) {
+                    field.style.display = "block";
+                });
+            } else {
+                toggleOptionalFieldsAddress.forEach(function(field) {
+                    field.style.display = "none";
+                });
+            }
+        });
+
+        // Initially hide optional fields if the checkboxAdress is not checked
+        if (!checkboxAddress.checked) {
+            toggleOptionalFieldsAddress.forEach(function(field) {
                 field.style.display = "none";
             });
         }

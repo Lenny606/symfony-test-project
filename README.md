@@ -43,7 +43,17 @@ symfony console debug:router
 host: mysql
 user: root
 ```
-
+### SLIM API
+needs ext-curl installed
+```
+composer require slim/slim:"4.*"
+composer require guzzlehttp/psr7 "^2"
+composer require zircote/swagger-php
+```
+### Swagger
+```
+composer require zircote/swagger-php
+```
 
 ### Setup Docker
 create docker-compose.yml \
