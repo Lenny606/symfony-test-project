@@ -2,23 +2,23 @@
 
 namespace App\Repository;
 
-use App\Entity\CommentType;
+use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<CommentType>
+ * @extends ServiceEntityRepository<Comment>
  *
- * @method CommentType|null find($id, $lockMode = null, $lockVersion = null)
- * @method CommentType|null findOneBy(array $criteria, array $orderBy = null)
- * @method CommentType[]    findAll()
- * @method CommentType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Comment|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Comment[]    findAll()
+ * @method Comment[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class CommentTypeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CommentType::class);
+        parent::__construct($registry, Comment::class);
     }
 
 //    /**
