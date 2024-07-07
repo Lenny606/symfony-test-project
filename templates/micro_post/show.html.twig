@@ -17,11 +17,140 @@
                 <span>{{ post.createdAt|date('d/m/Y') }}</span>
             {% endif %}
         </div>
-        <a href="{{ path('app_micro_comment_add', {id: post.id}) }}" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+        <a href="{{ path('app_micro_comment_add', {id: post.id}) }}"
+           class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
             Add Comment
         </a>
-        <a href="{{ path('app_micro_post') }}" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+        <a href="{{ path('app_micro_post') }}"
+           class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
             Back
         </a>
+        <a href="" class="target mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            Open Audioslave
+        </a>
+        <a href="" class="target-api mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            Open Audioslave - API
+        </a>
     </div>
+{#    <iframe#}
+{#            src="https://www.youtube.com/embed/WC5FdFlUcl0?autoplay=1&mute=1"#}
+{#            title="Audioslave - Be yourself"#}
+{#            width="500"#}
+{#            height="250>"#}
+{#            frameborder="0"#}
+{#            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"#}
+{#            allowfullscreen#}
+{#    ></iframe>#}
+    <!-- Modal Element -->
+    <div class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-4 rounded">
+            <h2 class="text-xl">Be Yourself</h2>
+            <iframe
+                    class="iframe-modal"
+                src="https://www.youtube.com/embed/WC5FdFlUcl0?autoplay=1&mute=1"
+                title="Audioslave - Be yourself"
+                width="500"
+                height="250>"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                ></iframe>
+
+            <button class="close-modal mt-4 px-4 py-2 bg-red-500 text-white rounded">Close</button>
+        </div>
+    </div>
+    <!-- Modal Element - YOUTUBE API-->
+    <div class="modal-api hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-4 rounded">
+            <h2 class="text-xl">Be Yourself - API</h2>
+            <iframe
+                    class="iframe-modal"
+                    src="https://www.youtube.com/embed/WC5FdFlUcl0"
+                    title="Audioslave - Be yourself"
+                    width="560"
+                    height="315>"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+            ></iframe>
+
+            <button class="close-modal-api mt-4 px-4 py-2 bg-red-500 text-white rounded">Close</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const targets = document.querySelectorAll('.target');
+
+            const modal = document.querySelector('.modal');
+
+            const iframe = document.querySelector('.iframe-modal');
+            modal.classList.toggle('hidden')
+            const modalContent = document.querySelector('.modal-content');
+            const closeModal = document.querySelector('.close-modal');
+
+            // Load the YouTube Player API script
+            const targetApi = document.querySelector('.target-api');
+            const modalApi = document.querySelector('.modal-api');
+            const closeModalApi = document.querySelector('.close-modal-api');
+
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // Create YouTube player
+            let player;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                    height: '315',
+                    width: '560',
+                    videoId: 'WC5FdFlUcl0'
+                });
+            }
+            function stopVideo() {
+                player.stopVideo();
+            }
+
+            targets.forEach(target => {
+                target.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    console.log('Target element clicked!');
+                    modal.classList.toggle('hidden');
+                });
+            });
+
+                targetApi.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    console.log('Target element clicked!');
+                    modalApi.classList.toggle('hidden');
+                });
+
+
+            closeModal.addEventListener('click', (event) => {
+                modal.classList.add('hidden');
+                iframe.removeAttribute('src')
+            });
+
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.classList.add('hidden');
+                    iframe.removeAttribute('src')
+                }
+            });
+            closeModalApi.addEventListener('click', (event) => {
+                modalApi.classList.add('hidden');
+                if (player) {
+                    stopVideo()
+                }
+            });
+
+            modalApi.addEventListener('click', (event) => {
+                if (modalApi.target === modalApi) {
+                    modalApi.classList.add('hidden');
+                    if (player) {
+                        stopVideo()
+                    }
+                }
+            });
+        });
+    </script>
 {% endblock %}
