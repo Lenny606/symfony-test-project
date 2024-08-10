@@ -12,6 +12,7 @@
             --grad-color4: #ce4949;
             --grad-color5: #6a0d83;
         }
+
         .border-grad {
             background: linear-gradient(115deg,
             var(--grad-color1),
@@ -32,10 +33,12 @@
             var(--grad-color5)
             );
         }
+
         .border-grad:hover .btn-grad {
             color: var(--btn-color-hover);
             padding: 1.1em 1.6em;
         }
+
         .btn-grad {
             border: none;
             background: var(--btn-bg);
@@ -44,12 +47,103 @@
             padding: 0.5em .5em;
             letter-spacing: 0.1em;
         }
+
         .btn-container {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 50vh;
         }
+
+        /*  SEARCH -------------------  */
+        .hide {
+            border: 0px;
+            clip: rect(0px, 0px, 0, 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0px;
+            position: absolute;
+            width: 1px;
+        }
+
+        .search-container {
+            width: 50%;
+            /*smallest screen*/
+            min-width: 320px;
+            height: 50px;
+        {# padding: 2px; #} margin: auto;
+            background: purple;
+        }
+
+        /*unfocused*/
+        .search-bar {
+            width: 30%;
+            line-height: 2;
+            border-radius: 4px;
+            border: 1px solid green;
+        }
+
+        .search-bar:focus {
+            width: 100%;
+            border-color: deepskyblue;
+        }
+
+        .search-bar::placeholder {
+            font-weight: 200;
+        }
+
+        .search-bar:focus::placeholder {
+            color: transparent;
+        }
+
+        {# LOADER --------------- #}
+        .loader-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+        }
+
+        .circle {
+            height: 1rem;
+            width: 1rem;
+            background: black;
+            margin: 0.5rem;
+            border-radius: 50%;
+            animation: pulse infinite alternate 1s;
+        }
+
+        .square {
+            height: 1rem;
+            width: 1rem;
+            background: red;
+            margin: 0.5rem;
+            animation: rotate infinite 2s;
+        }
+
+        @keyframes pulse {
+            from {
+                background: black;
+            }
+            to {
+                background: lightgray;
+                height: 2rem;
+                width: 2rem;
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(-45deg);
+            }
+
+            to {
+                transform: rotate(45deg);
+            }
+        }
+
+
     </style>
     {% for message in app.flashes('success') %}
         <div class="rounded-md pd-2 bg-green-300 border dark:border-green-600">{{ message }}</div>
@@ -60,6 +154,20 @@
         <div class="border-grad">
             <button class="btn-grad">Button</button>
         </div>
+    </div>
+    <div class="search-container">
+        <label for='search-field' class="hide">Search</label>
+        <input type="search" class="search-bar" id="search-field" placeholder="Search..."/>
+    </div>
+    <div class="loader-container">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    <div class="loader-container">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
     </div>
 
 
