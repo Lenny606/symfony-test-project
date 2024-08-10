@@ -143,6 +143,42 @@
             }
         }
 
+        /*    WORD CAROUSEL */
+        .word-carousel-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+        }
+
+        .word-carousel-container h1:after {
+            content: "";
+            animation: swap infinite 6s;
+            padding: 5px;
+            background: blue;
+            color: white;
+            border-radius: 4px;
+            margin-left: 4px;
+        }
+
+        @keyframes swap {
+            0% {
+                content: " Food";
+            }
+            25% {
+                content: " Sport";
+            }
+            50% {
+                content: " Color";
+            }
+            75% {
+                content: " Work";
+            }
+            100% {
+                content: " Food";
+            }
+        }
+
 
     </style>
     {% for message in app.flashes('success') %}
@@ -168,6 +204,10 @@
         <div class="square"></div>
         <div class="square"></div>
         <div class="square"></div>
+    </div>
+    <div class="word-carousel-container">
+        <h1 class="">I Like</h1>
+
     </div>
 
 
